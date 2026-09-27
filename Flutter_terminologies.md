@@ -487,6 +487,12 @@ Size
 - Important point to remember
 > **Constraints go down. Sizes come back up.** and **After the child determines its size, the parent determines where the child is positioned.**
 
+## How available constraints change with screen size
+
+- When the `screen size changes`, the `constraints` passed down through the widget tree can `also change`.
+
+- Screen size does not directly tell every child its size. The available space from the screen is passed through the parent-child layout hierarchy as constraints, and each parent determines what constraints its children receive
+
 ## mounted
 
 `mounted` is lifecycle information of the state in the element tree.
