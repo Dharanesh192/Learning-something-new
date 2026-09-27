@@ -38,6 +38,7 @@ So, I’m going to explain these things in **3 documents**:
   - what are the `Component widget` and `RenderObject widget`
   - What is the meaning of Scaffold.of(context)
   - How flutter `look up for the ancestor element` in the tree ?
+  - What is `mounted` ?
 
 - **Layouts and Responsive UI**
   - Layout includes `Row, Column, Expanded, etc.`
@@ -45,15 +46,6 @@ So, I’m going to explain these things in **3 documents**:
   - How available constraints change with screen size.
   - How you can build different layout based on your screen size ?
 
-- **Navigation and Routes**
-  - What is mean by `Navigator` ?
-  - How `navigator's route` stack works \[ Navigator.push(), Navigator.pop() \]
-  - What a Route is.
-
-- **showDialog()**
-  - What showDialog() actually does.
-  - Why it uses Navigator.
-  
 
 ## Widget description
 
@@ -398,6 +390,36 @@ linkStyle 8 stroke-width:2px
 - This problem can be `solved by using the context below the scaffold`.
 -  If we use the `Sacffold.of(context_1)` in the code **flutter goes to the context_1** and looks upward for the scaffold and **it will find it**
 
+
+## mounted
+
+`mounted` is lifecycle information of the state in the element tree.
+
+``` dart
+if (!mounted) return;
+```
+
+Think:
+
+> **mounted = "Is this State still attached to an Element?"**
+
+This is especially important after asynchronous work:
+
+``` dart
+Future<void> loadData() async {
+  await someOperation();
+
+  if (!mounted) return;
+
+  setState(() {
+    // update UI
+  });
+}
+```
+
+- The async operation can finish after the user has navigated away. The State may then no longer exist in the element tree.
+- `Mounted` does not mean "currently element that visible on the screen." It means the State is still attached to an Element.
+
 ## Layouts
 
 Layout is the process of **arranging and sizing widgets in the UI**. Flutter provides many layout widgets that can be **composed together to create the desired UI structure**.
@@ -492,38 +514,27 @@ Size
 - When the `screen size changes`, the `constraints` passed down through the widget tree can `also change`.
 
 - Screen size does not directly tell every child its size. The available space from the screen is passed through the parent-child layout hierarchy as constraints, and each parent determines what constraints its children receive
+- You can use widgets such as `LayoutBuilder` to react to the constraints available at that particular location in the tree
 
-## mounted
+```dart
+LayoutBuilder(
+  builder: (context, constraints) {
+    if (constraints.maxWidth < 600) {
+      return Column(
+        children: [...],
+      );
+    }
 
-`mounted` is lifecycle information of the state in the element tree.
-
-``` dart
-if (!mounted) return;
+    return Row(
+      children: [...],
+    );
+  },
+)
 ```
+> This code will react based on the screen size. If the width of screen is < 600 then return `column` otherwise `row`
 
-Think:
+- Based on this we can create a `UI for different screen sizes` in single code base. It can be done by using some widget that handles the layout of the app like `LayoutBuilder, Media.of(context)` 
 
-> **mounted = "Is this State still attached to an Element?"**
-
-This is especially important after asynchronous work:
-
-``` dart
-Future<void> loadData() async {
-  await someOperation();
-
-  if (!mounted) return;
-
-  setState(() {
-    // update UI
-  });
-}
-```
-
-The async operation can finish after the user has navigated away. The
-State may then no longer be mounted.
-
-`mounted` does not mean "currently visible on the screen." It means the
-State is still attached to an Element.
 
 ## Final memory table
 
