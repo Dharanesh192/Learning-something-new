@@ -6,8 +6,8 @@ After building that project, I became curious about how **Flutter actually works
 
 So, I’m going to explain these things in **3 documents**:
 
-* In this one, I’m going to cover **Flutter terminologies**.
-* Then, to learn how **Flutter code is converted into UI**, check this file: [Flutter code to UI.md](Flutter_code_to_UI.md)
+* First learn how **Flutter code is converted into UI**, check this file: [Flutter code to UI.md](Flutter_code_to_UI.md)
+* Then, in this one, I’m going to cover the **Flutter terminologies**.
 * For learning about **navigation**, check this file: [Navigation.md](Navigation.md)
 
 
