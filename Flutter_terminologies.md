@@ -400,21 +400,39 @@ linkStyle 8 stroke-width:2px
 
 ## Layouts
 
-Layout are the arrangement of the widget in our UI. Flutter's layout itself have widgets such as `Row, Column, Center, Expanded, etc`. Compose together to create the layout in a combined layout.
-- **Row** -> Row arranges children `horizontally`.
-- **Column** -> Column arranges children `vertically`.
-- **Expanded** -> It allow the child to occupy the space allocated to the flex slot
-  
+Layout is the process of **arranging and sizing widgets in the UI**. Flutter provides many layout widgets that can be **composed together to create the desired UI structure**.
+
+| Widget          | Purpose                                            |
+| --------------- | -------------------------------------------------- |
+| `Row`           | Horizontal arrangement                             |
+| `Column`        | Vertical arrangement                               |
+| `Expanded`      | Fill available with a flex space                   |
+| `Flexible`      | Flexibly use available space                       |
+| `Center`        | Center the child                                   |
+| `Align`         | Position the child                                 |
+| `Padding`       | Add space around the child                         |
+| `SizedBox`      | Control size / create space                        |
+| `Container`     | Combine common layout and decoration properties    |
+| `Stack`         | Overlap children                                   |
+| `Positioned`    | Position a child inside `Stack`                    |
+| `Wrap`          | Move children to the next line when space runs out |
+| `Spacer`        | Create flexible empty space                        |
+| `AspectRatio`   | Maintain a specific width-to-height ratio          |
+| `LayoutBuilder` | React to the available constraints                 |
+
 ## Constraints and Size
 
-Constraints are rules/limits supplied during layout:
+Constraints are like a set of **rules or limits** that are provided by the parent widget to the child during layout arrangement
 
-``` text
-minWidth
-maxWidth
-minHeight
-maxHeight
-```
+| Constraints   | Its purpose |
+| ------------- | ----------- |
+| **minWidth**  | It **set a minimum width** to the child to prevent from `shrink to 0px` |
+| **maxWidth**  | This is used to **set a maximum width** to the child to prevent from `growing Unnecessarily` |
+| **minHeight** | To **set a minimum height** to the child to prevent from `shrink to 0px` |
+| **maxHeight** | This one **sets a maximum height** to the child to prevent from `growing Unnecessarily` |
+
+> By assigning this values we can set boundaries to our child widget. This is useful when the child size is depending the screen size
+
 
 The child chooses a size that satisfies those constraints.
 
