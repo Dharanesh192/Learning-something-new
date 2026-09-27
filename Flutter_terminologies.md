@@ -157,7 +157,7 @@ They deal with things such as:
 -   painting
 -   Touch functionality
 
-- Not every widget has it own RenderObject. The widgets like \[ `Row`, `column`, `Stack`, `Expand`, `Listview`, `Builder` \] this all are used for `arrangement or positioning other widgets` in UI and this are `Component widgets that can compose other widgets`. So this can't have any separate `RenderObject` to show in the screen but can be used for other things such as **layout arrangements**
+- Not every widget has it own RenderObject. The widgets like \[ `Container`, `ListView`, `Builder`, `Card` \] this all are used for `arrangement or positioning other widgets` in UI and this are `Component widgets that can compose other widgets`. So this can't have any separate `RenderObject` to show in the screen but can be used for other things such as **layout arrangements**
 - The other elements like \[`Text`,`Icon`,`Image`,\] this are `RenderObjectWidgets correspond to RenderObjectElements that manage RenderObjects.`. It means simply this kind of element can have its `own RenderObject`
 
 Simplified:
