@@ -420,19 +420,56 @@ Layout is the process of **arranging and sizing widgets in the UI**. Flutter pro
 | `AspectRatio`   | Maintain a specific width-to-height ratio          |
 | `LayoutBuilder` | React to the available constraints                 |
 
-## Constraints and Size
+## Constraints
 
 Constraints are like a set of **rules or limits** that are provided by the parent widget to the child during layout arrangement
 
 | Constraints   | Its purpose |
 | ------------- | ----------- |
-| **minWidth**  | It **set a minimum width** to the child to prevent from `shrink to 0px` |
-| **maxWidth**  | This is used to **set a maximum width** to the child to prevent from `growing Unnecessarily` |
-| **minHeight** | To **set a minimum height** to the child to prevent from `shrink to 0px` |
-| **maxHeight** | This one **sets a maximum height** to the child to prevent from `growing Unnecessarily` |
+| **minWidth**  | It **set a minimum width** that the child allowed to have to prevent from `shrink to 0px` |
+| **maxWidth**  | This is used to **set a maximum width** that the child allowed to have that prevent from `growing Unnecessarily` |
+| **minHeight** | To **set a minimum height** that the child allowed to have to prevent it from `shrink to 0px` |
+| **maxHeight** | This one **sets a maximum height** that the child allowed to have so that prevent the child from `growing Unnecessarily` |
 
-> By assigning this values we can set boundaries to our child widget. This is useful when the child size is depending the screen size
+> By assigning these values, we can define the boundaries within which a child can choose its size. This is useful when the available space changes depending on the screen.
 
+## Sizes
+- The parent provide the constraint to each child with `defining the minimum and maximum size`. Each one of the child is going to `choose a size that going to satisfy they condition` given in they `widget description like height and width`
+  
+```dart
+Container(
+  width: 200,
+  height: 100,
+  alignment: Alignment.center,
+  child: SizedBox(
+    width: 120,
+    height: 50,
+    child: TextButton(
+      onPressed: () {},
+      child: Text("Click Me"),
+    ),
+  ),
+)
+```
+- In this one. The `container` is the parent with the size of `200*100` px and the `SizedBox` is the child with the size of `120*50` for the `Textbutton`
+- So the `parent` provides **constraints to its child based on the available space** for this one it is `200*100`. Size that the child needed is `120*50`, So the parent allocate that space this child
+
+```text
+Container
+  Size: 200 × 100
+       |
+       | constraints
+       v
+SizedBox
+  Constraints: 120 × 50
+       |
+       | constraints
+       v
+TextButton
+  Size: 120 × 50
+```
+  
+> If a `child cannot satisfy the constraints` provided by its parent, the layout may result in an `overflow or another layout error`, depending on the situation.
 
 The child chooses a size that satisfies those constraints.
 
@@ -447,10 +484,8 @@ Child
   v
 Size
 ```
-
-A useful simplified rule is:
-
-> **Constraints go down. Sizes come back up.**
+- Important point to remember
+> **Constraints go down. Sizes come back up.** and **After the child determines its size, the parent determines where the child is positioned.**
 
 ## mounted
 
