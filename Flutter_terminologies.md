@@ -96,7 +96,7 @@ Think:
 ## Element and Element Tree
 
 - An **Element** class are the implementation of `Buildcontext` we will see that later.
-- The element is **created by a method called createElement()**, this method will convert the **widget description into an element**.
+- Each Widget has a `createElement()` method that `creates the corresponding Element`. The **Flutter framework calls it when mounting/reconciling the widget**.
 - In the runtime process every widget in `Statelesswidget()` or `Statefullwidget()` are pass through this method to create they respective elements.
 
 
@@ -111,9 +111,7 @@ flowchart LR
     B --> C(Element: parent-child relation, Context, Configurations, Type & key of each widget)
 ```
 
-- Elements maintains a `runtime structure`, `parent-child relationships`, `Context the location details of the widget in the tree`
-current widget configuration associated with that location,
-`lifecycle information`, and the location represented by the Element.
+- Element maintains `parent-child relationships`, the current `widget configuration`, `lifecycle information`, and its `location` in the Element tree. `runtimeType and key` are properties of the Widget used during reconciliation.
 
 - The Element Tree is maintained in `RAM` while the app is running.
 
@@ -158,7 +156,7 @@ They deal with things such as:
 -   Touch functionality
 
 - Not every widget has it own RenderObject. The widgets like \[ `Container`, `ListView`, `Builder`, `Card` \] this all are used for `arrangement or positioning other widgets` in UI and this are `Component widgets that can compose other widgets`. So this can't have any separate `RenderObject` to show in the screen but can be used for other things such as **layout arrangements**
-- The other elements like \[`Text`,`Icon`,`Image`,\] this are `RenderObjectWidgets correspond to RenderObjectElements that manage RenderObjects.`. It means simply this kind of element can have its `own RenderObject`
+- The other elements like \[`Text`,`Icon`,`Image`,\] they are used to produce/use renderable widgets that lead to RenderObjects. The flow will be `RenderObjectWidgets correspond to RenderObjectElements that manage RenderObjects.`. It means simply this kind of element can have its `own RenderObject`
 
 Simplified:
 
@@ -296,9 +294,9 @@ class Mywidget extends StatelessWidget{
 ```
 - Technically, that the `BuildContext is the interface implemented by the Element`, not a separate object sitting beside it. Flutter's documentation explicitly says that `BuildContext objects are actually Element objects`
 - So now let's see how this code is turned into UI
-  - So first all the `widget description are returned by the main class's build()` method in one-by-one order. 
+  - `build()` returns a widget subtree. Flutter then recursively processes/reconciles that subtree.
   - When the application run the `main class` (**Mywidget**) will return its context then it calls the framework to create/mount that element and returns its `child widget description` (**container**)
-  - Then the `container's build()` will run and return its `child widget description` (**Text**) and `repeat this process` for all the widgets.
+  - Then the `container is a component widget` that build and produces a widget subtree. Flutter then reconciles that subtree with the existing Element tree.(**Text**) and `repeat this process` for all the widgets.
     
 ``` mermaid
 flowchart LR
@@ -327,12 +325,12 @@ flowchart TD
 
 ## Meaning of Scaffold.of(context)
 `Scaffold.of(under_context)` is that first go to context that mention in the code `under_context` and from that look upward to find the buildcontext of that element `Scaffold`.
-- It simply means go to that context (under_context) and find the element (Scaffold)
+- It simply means **Scaffold.of(context)** starts from the `Element represented by context` and looks upward for the `nearest ancestor Scaffold` and return its ScaffoldState.
 
 ## Let's see how the different context works
 - It is important to know that, the `name of the context can be anything`.
 - So as I mention above `An Element class are the implementation of Buildcontext` Now it the time to look that
-- So `each element` is going to have its own `Buildcontext` and when we use something like this `Mywidget build(Buildcontext context)` it going to creating a context to look up in the element tree.
+- So `each element` is going to have its own `Buildcontext` and when we use something like this `Mywidget build(Buildcontext context)` The `context parameter` represents the current Element's `location` in the Element tree. **build() does not create the context.**
 - That context is used to `find the needed element in the element tree` from that context. 
 
 > Let's learn this with an example
