@@ -49,7 +49,7 @@ So, I’m going to explain these things in **3 documents**:
 
 ## Widget description
 
-A widget description is the configuration of one widget: what type it is
+A widget description is the configuration of one widget that tells what type of widget it is
 and how it should be configured.
 
 ``` dart
@@ -72,8 +72,6 @@ Text
 ```
 
 It describes **what UI should exist and how it is configured**.
-
-It does not contain the final screen coordinates or pixels.
 
 ## Widget Tree
 
