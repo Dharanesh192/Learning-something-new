@@ -201,8 +201,7 @@ Think:
 - Flutter reconciles the returned widget descriptions from the build() with the existing
 one.
 
-- So that the element tree is not recreated whenever your application run a build command. Instead flutter compair
-  the new `widget description` created by the `build()`with the old `existing element tree by its type/key` of that widget in the element tree.
+- So that the element tree is not recreated whenever your application run a build command. Instead flutter compares the new `widget description` created by the `build()`with the old `existing element tree by its type/key` of that widget in the element tree.
   Based on the change it descide to `rebuild/update` the existing element tree.
 
 ## State
@@ -330,7 +329,8 @@ flowchart TD
 ## Let's see how the different context works
 - It is important to know that, the `name of the context can be anything`.
 - So as I mention above `An Element class are the implementation of Buildcontext` Now it the time to look that
-- So `each element` is going to have its own `Buildcontext` and when we use something like this `Mywidget build(Buildcontext context)` The `context parameter` represents the current Element's `location` in the Element tree. **build() does not create the context.**
+- Each `Element` implements `BuildContext`, so an **Element itself can be used as a BuildContext**.
+- when we use something like `Mywidget build(Buildcontext context)` The `context parameter` represents the current Element's `location` in the Element tree. **build() does not create the context.**
 - That context is used to `find the needed element in the element tree` from that context. 
 
 > Let's learn this with an example
@@ -446,9 +446,9 @@ Constraints are like a set of **rules or limits** that are provided by the paren
 
 | Constraints   | Its purpose |
 | ------------- | ----------- |
-| **minWidth**  | It **set a minimum width** that the child allowed to have to prevent from `shrink to 0px` |
+| **minWidth**  | It **set a minimum width** that the child allowed to have and it also prevent from `shrink to 0px` |
 | **maxWidth**  | This is used to **set a maximum width** that the child allowed to have that prevent from `growing Unnecessarily` |
-| **minHeight** | To **set a minimum height** that the child allowed to have to prevent it from `shrink to 0px` |
+| **minHeight** | To **set a minimum height** that the child allowed to have and it also prevent it from `shrink to 0px` |
 | **maxHeight** | This one **sets a maximum height** that the child allowed to have so that prevent the child from `growing Unnecessarily` |
 
 > By assigning these values, we can define the boundaries within which a child can choose its size. This is useful when the available space changes depending on the screen.
