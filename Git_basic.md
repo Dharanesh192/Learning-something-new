@@ -11,7 +11,7 @@ A quick guide to the most commonly used Git commands.
 ## Getting Started
 
 - `git init` : Initialize a new local Git repository in a existing directory.
-- - `git init <YOUR_REPO_NAME>` : Initialize a new local Git repository in a new directory.
+- `git init <YOUR_REPO_NAME>` : Initialize a new local Git repository in a new directory.
 - `git clone <URL>` : Download a project and its entire version history from a remote repository.
 - `git status` : Shows the current state of the working directory and staging area.
 
