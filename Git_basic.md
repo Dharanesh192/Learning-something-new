@@ -26,11 +26,15 @@ A quick guide to the most commonly used Git commands.
 
 ## Staging & Committing
 
+In Git, the **staging area** is an `intermediate area` between our **working directory and the Git repository**
+```mermaid
+flowchart LR
+a(Our local code get changed) --> b((git add .)) --> c(This will move the code to that staging area) --> d((git commit)) --> e(Will store the changes in the git repo)
+```
 - `git add <file>` : Stages a specific file for the next commit.
 - `git add .` : Stages all changes in the current directory.
 - `git commit -m "<message>"` : Records the staged changes in the repository history.
-- `git log` : Lists the commit history.
-- `git log --oneline` : Displays the commit history in a compact format.
+
 
 ## Branching & Merging
 
