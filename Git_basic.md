@@ -35,6 +35,16 @@ a(Our local code get changed) --> b((git add .)) --> c(This will move the code t
 - `git add .` : Stages all changes in the current directory.
 - `git commit -m "<message>"` : Records the staged changes in the repository history.
 
+## Logs
+
+Basically the logs are the **history of commit and its detail** that are `recorded by the Git` in your repository.
+
+- `git log` : This will the every commit along with their detail in your repository.
+- `git log -3` : This one shows the last 3 commit. you can use any numbers.
+- `git log --Agent.py` : This shows only the commits that included changes to Agent.py.
+- `git log -3 --Agent.py` : This combines both command, It show the last 3 commits that happened this file.
+- `git log --since="Apr 12 2026"` : By using since keyword we specify a date. Then Git will show commits from that date up to the latest one.
+- `git log --since="Arp 12 2026 --until="May 12 2026"` : This will shows the commit within this range.   
 
 ## Branching & Merging
 
