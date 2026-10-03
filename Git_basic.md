@@ -45,6 +45,9 @@ Basically the logs are the **history of commit and its detail** that are `record
 - `git log -3 --Agent.py` : This combines both command, It show the last 3 commits that happened this file.
 - `git log --since="Apr 12 2026"` : By using since keyword we specify a date. Then Git will show commits from that date up to the latest one.
 - `git log --since="Arp 12 2026 --until="May 12 2026"` : This will shows the commit within this range.   
+- For the dates in the above command you can use anything like
+  - date format(`MM DD YYYY/DD MM YYYY`) -> based on your system settings sometime the first two digits are date/month.
+  - Normal works like (`1 day ago`,`4 weeks ago`,`last month`)
 
 ## Branching & Merging
 
